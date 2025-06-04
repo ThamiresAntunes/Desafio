@@ -6,4 +6,4 @@ import { SolicitationService } from './solicitation.service';
   controllers: [SolicitationController],
   providers: [SolicitationService],
 })
-export class SolicitacaoModule {}
+export class SolicitationModule {}
