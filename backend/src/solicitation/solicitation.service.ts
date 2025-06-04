@@ -4,7 +4,7 @@ import { CreateSolicitacaoDto } from './dto/create-solicitation.dto';
 import { UpdateStatusDto } from './dto/update-status.dto';
 
 @Injectable()
-export class SolicitaçõesService {
+export class SolicitationService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(data: CreateSolicitacaoDto) {

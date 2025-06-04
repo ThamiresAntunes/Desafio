@@ -1,6 +1,6 @@
 import { IsEnum, IsNotEmpty, IsString, Matches } from 'class-validator';
 
-export class CreateSolicitacaoDto {
+export class CreateSolicitationDto {
   @IsEnum(['troca de lâmpada', 'tapa-buraco'])
   tipo: string;
 
