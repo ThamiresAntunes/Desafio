@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { IsEnum } from 'class-validator';
-import { IsNotEmpty } from 'class-validator';
-import { IsString } from 'class-validator';
-import { Matches } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString, Matches } from 'class-validator';
 
 export class CreateSolicitacaoDto {
   @IsEnum(['troca de lâmpada', 'tapa-buraco'])
