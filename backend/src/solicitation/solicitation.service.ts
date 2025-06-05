@@ -29,4 +29,17 @@ export class SolicitationService {
       data: { status: dto.status },
     });
   }
+
+  async delete(id: number) {
+    const solicitacao = await this.prisma.solicitacao.findUnique({
+      where: { id },
+    });
+    if (!solicitacao) {
+      throw new NotFoundException('Solicitação não encontrada');
+    }
+
+    return this.prisma.solicitacao.delete({
+      where: { id },
+    });
+  }
 }
