@@ -10,6 +10,8 @@ import {
 import { SolicitationService } from './solicitation.service';
 import { CreateSolicitationDto } from './dto/create-solicitation.dto';
 import { UpdateStatusDto } from './dto/update-status.dto';
+import { UseGuards } from '@nestjs/common';
+import { JwtGuard } from 'src/jwt/jwt.guard';
 
 @Controller('solicitations')
 export class SolicitationController {
@@ -20,11 +22,13 @@ export class SolicitationController {
     return this.solicitationService.create(createSolicitationDto);
   }
 
+  @UseGuards(JwtGuard)
   @Get()
   async findAll(@Query('type') type?: string) {
     return this.solicitationService.findAll(type);
   }
 
+  @UseGuards(JwtGuard)
   @Patch(':id/status')
   async updateStatus(
     @Param('id') id: number,
