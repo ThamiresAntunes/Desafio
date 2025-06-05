@@ -5,6 +5,7 @@ import {
   Param,
   Patch,
   Post,
+  Delete,
   Query,
 } from '@nestjs/common';
 import { SolicitationService } from './solicitation.service';
@@ -35,5 +36,11 @@ export class SolicitationController {
     @Body() updateStatusDto: UpdateStatusDto,
   ) {
     return this.solicitationService.updateStatus(id, updateStatusDto);
+  }
+
+  @UseGuards(JwtGuard)
+  @Delete(':id')
+  async delete(@Param('id') id: number) {
+    return this.solicitationService.delete(id);
   }
 }
