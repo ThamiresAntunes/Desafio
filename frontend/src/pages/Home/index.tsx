@@ -24,7 +24,7 @@ function Home() {
 
   return (
     <div className="container">
-      <h1>Bem-vindo</h1>
+      <h1>Bem-vindo ao <strong>UrbanTech</strong></h1>
       <p>Cadastre sua solicitação de serviço urbano:</p>
       <form onSubmit={handleSubmit} className="form">
         <h2>Cadastre uma Solicitação</h2>
