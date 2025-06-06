@@ -1,5 +1,6 @@
 import './style.css'
 import { useState } from 'react'
+import { createSolicitation } from '../../services/solicitationsService';
 
 function Home() {
 
@@ -17,8 +18,22 @@ function Home() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      await createSolicitation(form);
+      alert('Solicitação cadastrada com sucesso!');
+      setForm({
+        nomeSolicitante: '',
+        cpfCnpj: '',
+        endereco: '',
+        descricao: '',
+        tipo: '',
+      });
+    }
+    catch (error) {
+      console.error('Erro ao cadastrar solicitação:', error);
+      alert('Erro ao cadastrar solicitação. Tente novamente.');
+    }
 
-    //chamada para o backend (services/solicitacao.ts)
     console.log('Dados enviados:', form);
   };
 
@@ -28,9 +43,9 @@ function Home() {
       <p>Cadastre sua solicitação de serviço urbano:</p>
       <form onSubmit={handleSubmit} className="form">
         <h2>Cadastre uma Solicitação</h2>
-        <input name="nome-solicitante" type='text' placeholder="Endereço" value={form.nomeSolicitante} onChange={handleChange} required/>
-        <input name="cpf-solicitante" type='text'  placeholder="CPF/CNPJ do solicitante" value={form.cpfCnpj} onChange={handleChange} required/>
-        <input name="endereco" type='text'  placeholder="Nome do solicitante" value={form.endereco} onChange={handleChange} required/>
+        <input name="nomeSolicitante" type='text' placeholder="Nome" value={form.nomeSolicitante} onChange={handleChange} required/>
+        <input name="cpfCnpj" type='text'  placeholder="CPF/CNPJ do solicitante" value={form.cpfCnpj} onChange={handleChange} required/>
+        <input name="endereco" type='text'  placeholder="Endereço" value={form.endereco} onChange={handleChange} required/>
         <input name="descricao" type='text' placeholder="Descrição" value={form.descricao} onChange={handleChange} required/>
 
         <select name="tipo" value={form.tipo} onChange={handleChange} required>
