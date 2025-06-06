@@ -1,8 +1,8 @@
 import { IsEnum, IsNotEmpty, IsString, Matches } from 'class-validator';
 
 export enum TipoSolicitacao {
-  TROCA_LAMPADA = 'troca de lâmpada',
-  TAPA_BURACO = 'tapa-buraco',
+  TROCA_LAMPADA = 'TROCA_LAMPADA',
+  TAPA_BURACO = 'TAPA_BURACO',
 }
 
 export class CreateSolicitationDto {

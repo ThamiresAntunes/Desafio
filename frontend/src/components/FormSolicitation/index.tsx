@@ -1,23 +1,24 @@
 import { useState } from 'react';
 import { createSolicitation } from '../../services/solicitationsService';
-import type { Solicitacao, TipoSolicitacao } from '../../types/typeSolicitation';
+import type { Solicitacao } from '../../types/typeSolicitation';
 import './style.css';
 
+type SolicitacaoForm = Omit<Solicitacao, 'status'>;
+
 export default function FormSolicitacao() {
-  const [form, setForm] = useState<Solicitacao>({
+  const [form, setForm] = useState<SolicitacaoForm>({
     nomeSolicitante: '',
     cpfCnpj: '',
     endereco: '',
     descricao: '',
     tipo: 'TROCA_LAMPADA',
-    status: 'PENDENTE',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setForm((prevForm) => ({
       ...prevForm,
-      [name]: name === 'tipo' ? value as TipoSolicitacao : value,
+      [name]: value,
     }));
   };
 
@@ -32,9 +33,9 @@ export default function FormSolicitacao() {
         endereco: '',
         descricao: '',
         tipo: 'TROCA_LAMPADA',
-        status: 'PENDENTE',
       });
     } catch (error) {
+      console.log(form)
       console.error('Erro ao cadastrar solicitação:', error);
       alert('Erro ao cadastrar solicitação. Tente novamente.');
     }
