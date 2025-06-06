@@ -8,9 +8,9 @@ async function bootstrap() {
   app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true, // Remove propriedades não declaradas no DTO
-      forbidNonWhitelisted: true, // Lança erro se mandar propriedade desconhecida
-      transform: true, // Converte payloads para instâncias de classes
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
     }),
   );
 

@@ -1,12 +1,15 @@
 import FormSolicitacao from '../../components/FormSolicitation';
+import { Link } from 'react-router-dom';
 import './style.css';
 
 export default function Home() {
   return (
-    <div className="container">
-      <h1>Bem-vindo ao <strong>UrbanTech</strong></h1>
-      <p>Cadastre sua solicitação de serviço urbano:</p>
-      <FormSolicitacao />
-    </div>
+    <>
+      <Link to="/login" className='btn'>Login</Link>
+      <div className="container">
+        <h1>Bem-vindo ao <strong>UrbanTech</strong></h1>
+        <FormSolicitacao />
+      </div>
+    </>
   );
 }

@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 90vh;
   color: #ffff;
   
 }
@@ -16,4 +16,15 @@
   border-radius: 8px;
   padding: 2rem;
   color: #504f5a;
+}
+
+.btn{
+  background-color: #545365;
+  color: #ffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: end;
 }
