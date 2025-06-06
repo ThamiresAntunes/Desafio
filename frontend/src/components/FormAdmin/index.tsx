@@ -1,18 +1,15 @@
-import './style.css';
-import { useState } from 'react';
-import type { LoginAdmin } from '../../types/typeLoginAdmin';
+import "./style.css";
+import { useState } from "react";
+import type { LoginAdmin } from "../../types/typeLoginAdmin";
+import { login } from "../../services/adminService";
 
 export default function FormAdmin() {
-  const [FormAdmin, setForm] = useState<LoginAdmin>({
-    email: '',
-    senha: '',
-  });
+  const [form, setForm] = useState<LoginAdmin>({ email: "", senha: "" });
 
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setForm((prevForm) => ({
-      ...prevForm,
+    setForm((prev) => ({
+      ...prev,
       [name]: value,
     }));
   };
@@ -20,25 +17,36 @@ export default function FormAdmin() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      alert('Administrador logado com sucesso!');
-      setForm({
-        email: '',
-        senha: '',
-      });
+      const data = await login(form);
+      localStorage.setItem("token", data.access_token);
+      alert("Login realizado com sucesso!");
+      setForm({ email: "", senha: "" });
     } catch (error) {
-      console.log(FormAdmin)
-      console.error('Erro ao logar como administrador:', error);
-      alert('Erro ao logar como administrador. Tente novamente.');
+      console.error("Erro ao fazer login:", error);
+      alert("Erro ao logar como administrador. Tente novamente.");
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="form">
-      <input name="email" placeholder="Email" value={FormAdmin.email} onChange={handleChange} required />
-      <input name="senha" placeholder="Senha" value={FormAdmin.senha} onChange={handleChange} required />
-
-      <button className="btn" type="submit">Entrar</button>
+      <input
+        name="email"
+        placeholder="Email"
+        value={form.email}
+        onChange={handleChange}
+        required
+      />
+      <input
+        name="senha"
+        placeholder="Senha"
+        type="password"
+        value={form.senha}
+        onChange={handleChange}
+        required
+      />
+      <button className="btn" type="submit">
+        Entrar
+      </button>
     </form>
   );
-
 }
