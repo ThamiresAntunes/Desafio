@@ -25,8 +25,8 @@ export class SolicitationController {
 
   @UseGuards(JwtGuard)
   @Get()
-  async findAll(@Query('type') type?: string) {
-    return this.solicitationService.findAll(type);
+  findAll(@Query('tipo') tipo?: string) {
+    return this.solicitationService.findAll(tipo);
   }
 
   @UseGuards(JwtGuard)
