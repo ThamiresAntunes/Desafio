@@ -17,3 +17,18 @@ export const createSolicitation = async (solicitacao: Solicitacao): Promise<Soli
 
   return response.json();
 };
+
+// src/services/solicitationService.ts
+export async function updateSolicitationStatus(id: number, status: string) {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`http://localhost:3000/solicitations/${id}/status`, {
+    method: 'PATCH',
+    headers: { 
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ status }),
+  });
+  if (!response.ok) throw new Error('Erro ao atualizar status');
+  return response.json();
+}
