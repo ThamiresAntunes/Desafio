@@ -1,4 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateSolicitationDto } from './dto/create-solicitation.dto';
 import { UpdateStatusDto } from './dto/update-status.dto';
@@ -7,8 +8,26 @@ import { UpdateStatusDto } from './dto/update-status.dto';
 export class SolicitationService {
   constructor(private readonly prisma: PrismaService) {}
 
+  private formatCpfCnpj(cpfCnpj: string): string {
+    if (cpfCnpj.length === 11) {
+      // Formata como CPF: 000.000.000-00
+      return cpfCnpj.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    }
+    if (cpfCnpj.length === 14) {
+      // Formata como CNPJ: 00.000.000/0000-00
+      return cpfCnpj.replace(
+        /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
+        '$1.$2.$3/$4-$5',
+      );
+    }
+    return cpfCnpj;
+  }
+
   async create(data: CreateSolicitationDto) {
-    return this.prisma.solicitacao.create({ data });
+    const cpfCnpjFormatado = this.formatCpfCnpj(data.cpfCnpj);
+    return this.prisma.solicitacao.create({
+      data: { ...data, cpfCnpj: cpfCnpjFormatado },
+    });
   }
 
   async findAll(tipo?: string) {
