@@ -1,0 +1,32 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Solicitacao {
+  id            Int      @id @default(autoincrement())
+  tipo          String
+  endereco      String
+  descricao     String
+  nomeSolicitante String
+  cpfCnpj       String
+  status        Status   @default(PENDENTE)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum Status {
+  PENDENTE
+  EM_ANDAMENTO
+  CONCLUIDO
+}
+
+model Admin{
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  senha     String
+}
