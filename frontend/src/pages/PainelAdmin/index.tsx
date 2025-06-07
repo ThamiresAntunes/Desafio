@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getSolicitation } from "../../services/painelService";
 import "./style.css";
 import { useEffect, useState } from "react";
@@ -19,9 +21,9 @@ export default function PainelAdmin() {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <h2>Solicitações Cadastradas</h2>
-      <ul>
+      <ul className="solicitacoes-list">
         {solicitacoes.map((solicitation: any) => (
           <li key={solicitation.id}>
             {solicitation.id} - {solicitation.tipo} - {solicitation.endereco} -{" "}
@@ -29,7 +31,11 @@ export default function PainelAdmin() {
           </li>
         ))}
       </ul>
+      <div>
+        <h2></h2>
+        <input name="" placeholder="" required />
+      </div>
     </div>
   );
-    console.log(solicitacoes);
+  console.log(solicitacoes);
 }
